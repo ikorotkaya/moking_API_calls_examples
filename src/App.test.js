@@ -93,4 +93,35 @@ describe('App', () => {
     });
   });
 
+  describe('when Reddit API returns an error', () => {
+    const redditApiServer = setupServer(
+      // Describe network behavior with request handlers.
+      // Tip: move the handlers into their own module and
+      // import it across your browser and Node.js setups!
+      rest.get('https://www.reddit.com/r/popular.json', (req, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
+
+    // Enable request interception.
+    beforeAll(() => redditApiServer.listen());
+
+    // Reset handlers so that each test could alter them
+    // without affecting other, unrelated tests.
+    afterEach(() => redditApiServer.resetHandlers());
+
+    // Don't forget to clean up afterwards.
+    afterAll(() => redditApiServer.close());
+
+    test('renders "Error"', async () => {
+      render(<App />);
+
+      await waitFor(() => {
+        expect(screen.getByText('Error')).toBeInTheDocument()
+      })
+      expect(screen.queryByText('No posts')).not.toBeInTheDocument()
+      expect(screen.queryAllByTestId('card')).toHaveLength(0);
+    });
+  });
+
 });

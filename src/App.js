@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [posts, setPosts] = useState({});
+  const [error, setError] = useState(false);
 
   const fetchPosts = async () => {
 		let url = `https://www.reddit.com/r/popular.json`;
@@ -31,7 +32,9 @@ function App() {
 
       setPostsLoaded(true);
       setPosts(feedPosts);
-		});
+		}, []).catch(error => {
+      setError(true);
+    });
 	}, []);
 
 
@@ -43,6 +46,7 @@ function App() {
 
       {postsLoaded && Object.keys(posts).length === 0 && <p>No posts</p>}
 
+      {error && <p>Error</p>}
 
       {postsLoaded && Object.keys(posts).length > 0 && Object.keys(posts).map((key) => {
         const post = posts[key];
