@@ -39,6 +39,8 @@ function App() {
     <div className='container'>
       <h1>Reddit</h1>
 
+      {!postsLoaded && <p>Loading</p>}
+
       {postsLoaded && Object.keys(posts).length > 0 && Object.keys(posts).map((key) => {
         const post = posts[key];
         return (
