@@ -41,6 +41,9 @@ function App() {
 
       {!postsLoaded && <p>Loading</p>}
 
+      {postsLoaded && Object.keys(posts).length === 0 && <p>No posts</p>}
+
+
       {postsLoaded && Object.keys(posts).length > 0 && Object.keys(posts).map((key) => {
         const post = posts[key];
         return (
