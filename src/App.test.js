@@ -40,25 +40,25 @@ describe('App', () => {
       const cards = await screen.findAllByTestId('card');
       expect(cards).toHaveLength(2);
 
-      const firstCard = await screen.getAllByTestId('card').find((card) => card.textContent.includes('React Testing library is so much fun'));
+      const firstCard = screen.getAllByTestId('card').find((card) => card.textContent.includes('React Testing library is so much fun'));
       const firstHeadline = within(firstCard).getByTestId('headline');
       expect(firstHeadline).toHaveTextContent('React Testing library is so much fun');
 
-      const auhtor_first = within(firstCard).getByTestId('author');
-      expect(auhtor_first).toHaveTextContent('Turbostrider27');
+      const auhtorFirst = within(firstCard).getByTestId('author');
+      expect(auhtorFirst).toHaveTextContent('Turbostrider27');
 
-      const num_comments_first = within(firstCard).getByTestId('num_comments');
-      expect(num_comments_first).toHaveTextContent('3492');
+      const numCommentsFirst = within(firstCard).getByTestId('num_comments');
+      expect(numCommentsFirst).toHaveTextContent('3492');
 
-      const secondCard = await screen.getAllByTestId('card').find((card) => card.textContent.includes('MSW FTW'));
-      const headline_second = within(secondCard).getByTestId('headline');
-      expect(headline_second).toHaveTextContent('MSW FTW');
+      const secondCard = screen.getAllByTestId('card').find((card) => card.textContent.includes('MSW FTW'));
+      const headlineSecond = within(secondCard).getByTestId('headline');
+      expect(headlineSecond).toHaveTextContent('MSW FTW');
 
-      const auhtor_second = within(secondCard).getByTestId('author');
-      expect(auhtor_second).toHaveTextContent('_Saahil_');
+      const auhtorSeccond = within(secondCard).getByTestId('author');
+      expect(auhtorSeccond).toHaveTextContent('_Saahil_');
 
-      const num_comments_second = within(secondCard).getByTestId('num_comments');
-      expect(num_comments_second).toHaveTextContent('4955');
+      const numCommentsSecond = within(secondCard).getByTestId('num_comments');
+      expect(numCommentsSecond).toHaveTextContent('4955');
     });
   });
 
