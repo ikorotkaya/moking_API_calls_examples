@@ -124,4 +124,27 @@ describe('App', () => {
     });
   });
 
+  describe('when Reddit API returns no comments', () => {
+
+    const redditApiServer = setupServer(
+      rest.get('https://www.reddit.com/r/popular.json', (req, res, ctx) => {
+        return res(ctx.json(PopularSubredditResponse));
+      }
+    ));
+
+    // Enable request interception.
+    beforeAll(() => redditApiServer.listen());
+
+    // Reset handlers so that each test could alter them
+    // without affecting other, unrelated tests.
+    afterEach(() => redditApiServer.resetHandlers());
+
+    // Don't forget to clean up afterwards.
+    afterAll(() => redditApiServer.close());
+
+    
+
+
+  });
+  
 });
